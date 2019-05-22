@@ -314,9 +314,11 @@ def demo_aliasing():
     title('Sinusschwingungen zu einer Abtastwertefolge')
     grid(True)
 
-def demo1(fS, tmax, f):
+def demo1(fS, tmax, f, A):
     t = np.arange(0,tmax,1/fS)
-    x = 3*np.cos(2*np.pi*f*t) +  np.cos(20*2*np.pi*f*t)
+    x = np.zeros(len(t))
+    for i in np.arange(0, len(f)):
+        x = x + A[i]*np.cos(2*np.pi*f[i]*t)
     ns = abs(np.fft.fft(x))/len(t)
     ls = ns**2
     plt.figure(figsize=(16,8))
